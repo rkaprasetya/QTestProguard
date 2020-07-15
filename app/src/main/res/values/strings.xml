@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">QTest</string>
+    <string name="tv_title">title</string>
+    <string name="tv_desc">desc</string>
+    <string name="tv_price">23</string>
+    <string name="stok">stok</string>
+</resources>
