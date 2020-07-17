@@ -3,7 +3,6 @@ package com.raka.qtest.view.ui.splash
 import com.raka.qtest.data.model.ProductListResponse
 import com.raka.qtest.data.model.ProductLocal
 import com.raka.qtest.view.base.BasePresenter
-import io.reactivex.Completable
 import io.reactivex.Single
 
 interface SplashContract {

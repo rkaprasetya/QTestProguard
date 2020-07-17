@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.google.android.material.appbar.AppBarLayout
 import com.raka.qtest.R
 import com.raka.qtest.data.database.AppDatabase
 import com.raka.qtest.data.database.ParametersDao
@@ -28,14 +29,21 @@ class ProductDetailFragment : Fragment(),ProductDetailContracts.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val mview = inflater.inflate(R.layout.fragment_product_detail, container, false)
-        mview.appbar_product_detail.setOnClickListener {
-            findNavController().popBackStack()
+        val mView = inflater.inflate(R.layout.fragment_product_detail, container, false)
+        val isTablet = context!!.resources.getBoolean(R.bool.isTablet)
+        if(!isTablet){
+            mView.appbar_product_detail.setOnClickListener {
+                findNavController().popBackStack()
+            }
+            val appBar :AppBarLayout = mView.findViewById(R.id.appbar_product_detail)
+            appBar.visibility = View.VISIBLE
         }
-        return mview
+        return mView
     }
     override fun setData(productDetailCompact: ProductDetailCompact) {
         Glide.with(this).load(productDetailCompact.large).into(iv_detail)
+        iv_detail.visibility = View.VISIBLE
+        ll_detail.visibility = View.VISIBLE
         tv_detail_appbar.text = productDetailCompact.productName
         tv_detail_desc.text = productDetailCompact.description
         tv_detail_price.text = getString(R.string.detail_price,productDetailCompact.price.toString())

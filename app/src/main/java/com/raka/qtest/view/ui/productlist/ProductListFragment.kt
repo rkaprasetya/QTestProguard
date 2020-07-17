@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.phelat.navigationresult.BundleFragment
 import com.raka.qtest.R
@@ -17,8 +18,10 @@ import com.raka.qtest.data.model.ProductListCompact
 import kotlinx.android.synthetic.main.fragment_product_list.*
 
 class ProductListFragment : BundleFragment(),ProductListContracts.View {
+    private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: ProductListAdapter
     private lateinit var presenter:ProductListContracts.Presenter
+    private lateinit var navHostFragment: NavHostFragment
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val dao : ParametersDao = AppDatabase.getInstance(requireContext()).parametersDao()
@@ -29,7 +32,26 @@ class ProductListFragment : BundleFragment(),ProductListContracts.View {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_product_list, container, false)
+        val mView:View
+        val isTablet = context!!.resources.getBoolean(R.bool.isTablet)
+        when{
+            isTablet->{
+                mView = inflater.inflate(R.layout.fragment_list_tablet,container,false)
+                navHostFragment = childFragmentManager.findFragmentById(R.id.fragment_detail_container) as NavHostFragment
+                navHostFragment.navController.navigate(R.id.product_detail_tablet)
+            }
+            else -> {
+                mView = inflater.inflate(R.layout.fragment_product_list, container, false)
+                navHostFragment = NavHostFragment()
+            }
+        }
+        recyclerView = mView.findViewById(R.id.rv_product)
+        adapter = ProductListAdapter()
+        val layoutManager = LinearLayoutManager(activity)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+        recyclerView.adapter = adapter
+        return mView
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,14 +61,14 @@ class ProductListFragment : BundleFragment(),ProductListContracts.View {
     private fun setupAdapter(){
         adapter = ProductListAdapter()
         val layoutManager = LinearLayoutManager(activity)
-        rv_product.layoutManager = layoutManager
-        rv_product.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
-        rv_product.adapter = adapter
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+        recyclerView.adapter = adapter
     }
     override fun setData(bannerCompact: BannerCompact, list: List<ProductListCompact>) {
-        adapter.updateData(list.toMutableList())
+        adapter.updateData(list.toMutableList(),navHostFragment)
         Glide.with(this).load(bannerCompact.banner).into(iv_banner)
-        rv_product.visibility = View.VISIBLE
+        recyclerView.visibility = View.VISIBLE
         iv_banner.visibility = View.VISIBLE
     }
     override fun showNoData() {
