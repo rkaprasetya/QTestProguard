@@ -7,7 +7,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_list"
+        android:id="@+id/iv_item_list"
         android:layout_width="@dimen/iv_item_width"
         android:layout_height="@dimen/iv_item_height"
         android:layout_marginStart="@dimen/item_margin_start"
@@ -20,7 +20,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_item_name"
         android:layout_width="@dimen/tv_item_title_width"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/tv_item_title_margin_start"
@@ -28,20 +28,20 @@
         android:textSize="@dimen/item_tv_size"
         android:textColor="@color/orange"
         android:text="@string/tv_title"
-        app:layout_constraintStart_toEndOf="@+id/iv_list"
+        app:layout_constraintStart_toEndOf="@+id/iv_item_list"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_list_price"
-        android:layout_width="@dimen/tv_item_price_width"
+        android:id="@+id/tv_item_price"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/grey"
         android:textSize="@dimen/item_tv_size"
         android:layout_marginStart="@dimen/item_margin_start"
         android:layout_marginTop="@dimen/tv_item_price_margin_top"
         android:text="@string/tv_desc"
-        app:layout_constraintStart_toEndOf="@+id/iv_list"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toEndOf="@+id/iv_item_list"
+        app:layout_constraintTop_toBottomOf="@+id/tv_item_name" />
 
     <TextView
         android:id="@+id/tv_item_stok"

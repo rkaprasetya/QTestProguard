@@ -3,50 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/repoListFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
-        android:id="@+id/repoListFragment"
-        android:name="com.raka.myapplication.view.ui.repolist.RepoListFragment"
-        android:label="fragment_repo_list"
-        tools:layout="@layout/fragment_repo_list">
+        android:id="@+id/splashFragment"
+        android:name="com.raka.qtest.view.ui.splash.SplashFragment"
+        android:label="activity_main"
+        tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_repoListFragment_to_repoDetailFragment"
-            app:destination="@id/repoDetailFragment" />
-        <action
-            android:id="@+id/action_repoListFragment_to_formActivity"
-            app:destination="@id/formActivity" />
-        <action
-            android:id="@+id/action_repoListFragment_to_formFragment"
-            app:destination="@id/formFragment" />
+            android:id="@+id/action_splashFragment_to_productListFragment"
+            app:destination="@id/productListFragment"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true"
+            />
     </fragment>
     <fragment
-        android:id="@+id/repoDetailFragment"
-        android:name="com.raka.myapplication.view.ui.repodetail.RepoDetailFragment"
-        android:label="fragment_repo_detail"
-        tools:layout="@layout/fragment_repo_detail">
-        <argument
-            android:name="url"
-            android:defaultValue="https://wwww.github.com"
-            app:argType="string" />
+        android:id="@+id/productListFragment"
+        android:name="com.raka.qtest.view.ui.productlist.ProductListFragment"
+        tools:layout="@layout/fragment_product_list"
+        android:label="ProductListFragment" >
+        <action
+            android:id="@+id/action_productListFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
     </fragment>
-    <activity
-        android:id="@+id/formActivity"
-        android:name="com.raka.myapplication.view.ui.form.FormActivity"
-        android:label="activity_form"
-        tools:layout="@layout/activity_form" />
     <fragment
-        android:id="@+id/formFragment"
-        android:name="com.raka.myapplication.view.ui.form.FormFragment"
-        android:label="fragment_form"
-        tools:layout="@layout/fragment_form" >
+        android:id="@+id/productDetailFragment"
+        android:name="com.raka.qtest.view.ui.productdetail.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
         <argument
-            android:name="message"
-            android:defaultValue="hello"
-            app:argType="string" />
-        <argument
-            android:name="day"
-            android:defaultValue="hzzzello"
-            app:argType="string" />
+            android:name="id"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
 </navigation>
