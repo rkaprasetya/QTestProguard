@@ -6,3 +6,4 @@ Libraries used:
 3. Room
 4. Coroutine
 5. Navigation Component
+6. Proguard
