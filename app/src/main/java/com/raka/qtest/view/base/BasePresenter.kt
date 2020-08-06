@@ -8,4 +8,5 @@ import kotlin.coroutines.CoroutineContext
 
 interface BasePresenter:CoroutineScope {
     fun onDestroy()
+
 }

@@ -46,11 +46,6 @@ class ProductListFragment : BundleFragment(),ProductListContracts.View {
             }
         }
         recyclerView = mView.findViewById(R.id.rv_product)
-        adapter = ProductListAdapter()
-        val layoutManager = LinearLayoutManager(activity)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
-        recyclerView.adapter = adapter
         return mView
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

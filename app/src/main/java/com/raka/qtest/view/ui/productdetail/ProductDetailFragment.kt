@@ -50,9 +50,7 @@ class ProductDetailFragment : Fragment(),ProductDetailContracts.View {
         tv_detail_title.text = productDetailCompact.productName
     }
     override fun onDestroy() {
-        super.onDestroy()
         presenter.onDestroy()
+        super.onDestroy()
     }
 }
-
-
